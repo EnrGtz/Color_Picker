@@ -380,6 +380,7 @@ namespace Color_Picker {
 
             var colorLista = new ListViewItem("");
             colorLista.SubItems.Add(rgba);
+            colorLista.SubItems.Add(TbRGBA.Text);
             colorLista.UseItemStyleForSubItems = false;
             LisVieColores.Items.Add(colorLista);
 
@@ -393,7 +394,7 @@ namespace Color_Picker {
             if (LisVieColores.SelectedItems.Count <= 0) return;
 
             int index = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
-
+            
             string[] cT = LisVieColores.Items[index].SubItems[1].Text.Split(',');
             int      r  = int.Parse($"{cT[0]}");
             int      g  = int.Parse($"{cT[1]}");
@@ -514,6 +515,26 @@ namespace Color_Picker {
 
             TbRGB.Text  = color.ColorATexto();
             TbRGBA.Text = color.ColorATexto(true);
+        }
+
+        private void LisVieColores_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => e.DrawDefault = true;
+
+        private void LisVieColores_DrawSubItem(object sender, DrawListViewSubItemEventArgs e) {
+            e.DrawBackground();
+            e.DrawText();
+            int indexDibujo = e.ItemIndex;
+
+            if (LisVieColores.SelectedItems.Count <= 0) return;
+
+            int indexSeleccion = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
+
+            if (indexDibujo != indexSeleccion) return;
+
+            if ((e.ItemState & ListViewItemStates.Selected) != ListViewItemStates.Selected) return;
+
+            Rectangle bounds = e.Bounds;
+            bounds.Inflate(-1, -1);
+            ControlPaint.DrawFocusRectangle(e.Graphics, bounds);
         }
 
     }

@@ -428,17 +428,21 @@
             this.CHRGBA,
             this.CHHex,
             this.CHHSL});
+            this.LisVieColores.FullRowSelect = true;
             this.LisVieColores.GridLines = true;
             this.LisVieColores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LisVieColores.LabelWrap = false;
             this.LisVieColores.Location = new System.Drawing.Point(338, 35);
             this.LisVieColores.MultiSelect = false;
             this.LisVieColores.Name = "LisVieColores";
+            this.LisVieColores.OwnerDraw = true;
             this.LisVieColores.ShowGroups = false;
             this.LisVieColores.Size = new System.Drawing.Size(300, 352);
             this.LisVieColores.TabIndex = 5;
             this.LisVieColores.UseCompatibleStateImageBehavior = false;
             this.LisVieColores.View = System.Windows.Forms.View.Details;
+            this.LisVieColores.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.LisVieColores_DrawColumnHeader);
+            this.LisVieColores.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.LisVieColores_DrawSubItem);
             this.LisVieColores.SelectedIndexChanged += new System.EventHandler(this.LisVieColores_SelectedIndexChanged);
             // 
             // CHColor
