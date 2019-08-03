@@ -65,7 +65,6 @@
             this.CHColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CHRGBA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CHHex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CHHSL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2 = new System.Windows.Forms.Panel();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnCargar = new System.Windows.Forms.Button();
@@ -423,14 +422,16 @@
             // 
             // LisVieColores
             // 
+            this.LisVieColores.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.LisVieColores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CHColor,
             this.CHRGBA,
-            this.CHHex,
-            this.CHHSL});
+            this.CHHex});
+            this.LisVieColores.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LisVieColores.FullRowSelect = true;
             this.LisVieColores.GridLines = true;
             this.LisVieColores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.LisVieColores.HideSelection = false;
             this.LisVieColores.LabelWrap = false;
             this.LisVieColores.Location = new System.Drawing.Point(338, 35);
             this.LisVieColores.MultiSelect = false;
@@ -444,6 +445,7 @@
             this.LisVieColores.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.LisVieColores_DrawColumnHeader);
             this.LisVieColores.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.LisVieColores_DrawSubItem);
             this.LisVieColores.SelectedIndexChanged += new System.EventHandler(this.LisVieColores_SelectedIndexChanged);
+            this.LisVieColores.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LisVieColores_KeyDown);
             // 
             // CHColor
             // 
@@ -452,15 +454,12 @@
             // CHRGBA
             // 
             this.CHRGBA.Text = "RGBA";
-            this.CHRGBA.Width = 89;
+            this.CHRGBA.Width = 119;
             // 
             // CHHex
             // 
             this.CHHex.Text = "Hex";
-            // 
-            // CHHSL
-            // 
-            this.CHHSL.Text = "HSL";
+            this.CHHex.Width = 110;
             // 
             // panel2
             // 
@@ -713,7 +712,6 @@
         private System.Windows.Forms.ToolStripMenuItem actualizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader CHHex;
-        private System.Windows.Forms.ColumnHeader CHHSL;
     }
 }
 

@@ -36,9 +36,9 @@ namespace Color_Picker {
                 }
 
                 string txtInicial = TbColorInicial.Text.Replace("#", "").Trim();
-                string txtFinal = TbColorFinal.Text.Replace("#", "").Trim();
+                string txtFinal   = TbColorFinal.Text.Replace("#", "").Trim();
 
-                bool alfaCi = (txtInicial.Length >= 8) || (txtInicial.Length == 4) ;
+                bool alfaCi = (txtInicial.Length >= 8) || (txtInicial.Length == 4);
                 bool alfaCf = (txtFinal.Length >= 8) || (txtFinal.Length == 4);
 
                 Color cinicial = TbColorInicial.Text.HexaColor(alfaCi);
@@ -49,8 +49,13 @@ namespace Color_Picker {
 
                 LvColores.Items.Clear();
 
-                foreach (ListViewItem colorLista in degradado.Select(color => $"{color.R},{color.G},{color.B},{color.A}").Select(colorTexto => new ListViewItem(colorTexto))) {
-                    colorLista.SubItems.Add("");
+                foreach (Color color in degradado) {
+                    string hex  = color.ColorATexto(true);
+                    string rgba = $"{color.R},{color.G},{color.B},{color.A}";
+
+                    var colorLista = new ListViewItem("");
+                    colorLista.SubItems.Add(rgba);
+                    colorLista.SubItems.Add(hex);
                     colorLista.UseItemStyleForSubItems = false;
                     LvColores.Items.Add(colorLista);
                 }
@@ -67,9 +72,12 @@ namespace Color_Picker {
                 var listViewColores = (Owner as Principal).Controls["LisVieColores"] as ListView;
 
                 foreach (ListViewItem item in LvColores.SelectedItems) {
+                    string rgba = item.SubItems[1].Text;
+                    string hex  = item.SubItems[2].Text;
 
-                    var colorLista = new ListViewItem(item.Text);
-                    colorLista.SubItems.Add("");
+                    var colorLista = new ListViewItem("");
+                    colorLista.SubItems.Add(rgba);
+                    colorLista.SubItems.Add(hex);
                     colorLista.UseItemStyleForSubItems = false;
                     listViewColores.Items.Add(colorLista);
 
@@ -88,7 +96,7 @@ namespace Color_Picker {
 
             if (listViewColores.SelectedItems.Count == 0) return;
 
-            string colorRgb = listViewColores.SelectedItems[0].Text;
+            string colorRgb = listViewColores.SelectedItems[0].SubItems[1].Text;
             TbColorInicial.Text = colorRgb.RgbAHex();
         }
 
@@ -99,8 +107,27 @@ namespace Color_Picker {
 
             if (listViewColores.SelectedItems.Count == 0) return;
 
-            string colorRgb = listViewColores.SelectedItems[0].Text;
+            string colorRgb = listViewColores.SelectedItems[0].SubItems[1].Text;
             TbColorFinal.Text = colorRgb.RgbAHex();
+        }
+
+        private void LvColores_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => e.DrawDefault = true;
+
+        private void LvColores_DrawSubItem(object sender, DrawListViewSubItemEventArgs e) {
+            e.DrawBackground();
+            e.DrawText();
+
+            int index = e.ItemIndex;
+
+            if (LvColores.SelectedItems.Count <= 0) return;
+
+            if (!LvColores.Items[index].Selected) return;
+
+            Rectangle bounds = e.Bounds;
+            bounds.Inflate(-1, -1);
+
+            ControlPaint.DrawBorder(e.Graphics, bounds, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid);
+
         }
 
     }

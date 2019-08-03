@@ -126,15 +126,6 @@ namespace Color_Picker {
 
                     case 4:
 
-                        //string astr = colorhex.Substring(0, 1);
-                        //a  = int.Parse($"{astr}{astr}", NumberStyles.AllowHexSpecifier);
-                        //rs = colorhex.Substring(1, 1);
-                        //r  = int.Parse($"{rs}{rs}", NumberStyles.AllowHexSpecifier);
-                        //gs = colorhex.Substring(2, 1);
-                        //g  = int.Parse($"{gs}{gs}", NumberStyles.AllowHexSpecifier);
-                        //bs = colorhex.Substring(3, 1);
-                        //b  = int.Parse($"{bs}{bs}", NumberStyles.AllowHexSpecifier);
-
                         rs = colorhex.Substring(0, 1);
                         r  = int.Parse($"{rs}{rs}", NumberStyles.AllowHexSpecifier);
                         gs = colorhex.Substring(1, 1);
@@ -150,32 +141,19 @@ namespace Color_Picker {
 
                     case 5:
 
-                        //a  = int.Parse(colorhex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
-                        //rs = colorhex.Substring(2, 1);
-                        //r  = int.Parse($"{rs}{rs}", NumberStyles.AllowHexSpecifier);
-                        //gs = colorhex.Substring(3, 1);
-                        //g  = int.Parse($"{gs}{gs}", NumberStyles.AllowHexSpecifier);
-                        //bs = colorhex.Substring(4, 1);
-                        //b  = int.Parse($"{bs}{bs}", NumberStyles.AllowHexSpecifier);
-
                         rs = colorhex.Substring(0, 1);
                         r  = int.Parse($"{rs}{rs}", NumberStyles.AllowHexSpecifier);
-                        gs = colorhex.Substring(2, 1);
+                        gs = colorhex.Substring(1, 1);
                         g  = int.Parse($"{gs}{gs}", NumberStyles.AllowHexSpecifier);
-                        bs = colorhex.Substring(3, 1);
+                        bs = colorhex.Substring(2, 1);
                         b  = int.Parse($"{bs}{bs}", NumberStyles.AllowHexSpecifier);
-                        a  = int.Parse(colorhex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+                        a  = int.Parse(colorhex.Substring(3, 2), NumberStyles.AllowHexSpecifier);
 
                         color = Color.FromArgb(a, r, g, b);
 
                         break;
 
                     case 8:
-
-                        //a = int.Parse(colorhex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
-                        //r = int.Parse(colorhex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
-                        //g = int.Parse(colorhex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
-                        //b = int.Parse(colorhex.Substring(6, 2), NumberStyles.AllowHexSpecifier);
 
                         r = int.Parse(colorhex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
                         g = int.Parse(colorhex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
@@ -194,8 +172,10 @@ namespace Color_Picker {
 
                 return color;
             }
-            catch (Exception) {
+            catch (Exception ex) {
                 // MessageBox.Show(@"No se encontró un color valido");
+
+                var test = ex.Message;
 
                 return Color.Black;
             }

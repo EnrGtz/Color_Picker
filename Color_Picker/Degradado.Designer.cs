@@ -40,6 +40,7 @@
             this.LblCantidad = new System.Windows.Forms.Label();
             this.BtnDegradado = new System.Windows.Forms.Button();
             this.BtnAgregar = new System.Windows.Forms.Button();
+            this.ColHHex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.NumCantidadColores)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // TbColorFinal
             // 
             this.TbColorFinal.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.TbColorFinal.Location = new System.Drawing.Point(105, 25);
+            this.TbColorFinal.Location = new System.Drawing.Point(125, 25);
             this.TbColorFinal.MaxLength = 9;
             this.TbColorFinal.Name = "TbColorFinal";
             this.TbColorFinal.Size = new System.Drawing.Size(63, 20);
@@ -75,7 +76,7 @@
             // 
             this.LblColorFinal.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.LblColorFinal.AutoSize = true;
-            this.LblColorFinal.Location = new System.Drawing.Point(102, 9);
+            this.LblColorFinal.Location = new System.Drawing.Point(122, 9);
             this.LblColorFinal.Name = "LblColorFinal";
             this.LblColorFinal.Size = new System.Drawing.Size(69, 13);
             this.LblColorFinal.TabIndex = 1;
@@ -87,23 +88,29 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LvColores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColHColor,
             this.ColHRGBA,
-            this.ColHColor});
+            this.ColHHex});
+            this.LvColores.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LvColores.FullRowSelect = true;
             this.LvColores.GridLines = true;
             this.LvColores.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.LvColores.HideSelection = false;
             this.LvColores.LabelWrap = false;
             this.LvColores.Location = new System.Drawing.Point(12, 51);
             this.LvColores.Name = "LvColores";
-            this.LvColores.Size = new System.Drawing.Size(222, 243);
+            this.LvColores.OwnerDraw = true;
+            this.LvColores.Size = new System.Drawing.Size(262, 243);
             this.LvColores.TabIndex = 2;
             this.LvColores.UseCompatibleStateImageBehavior = false;
             this.LvColores.View = System.Windows.Forms.View.Details;
+            this.LvColores.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.LvColores_DrawColumnHeader);
+            this.LvColores.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.LvColores_DrawSubItem);
             // 
             // ColHRGBA
             // 
             this.ColHRGBA.Text = "RGBA";
-            this.ColHRGBA.Width = 143;
+            this.ColHRGBA.Width = 108;
             // 
             // ColHColor
             // 
@@ -112,7 +119,7 @@
             // NumCantidadColores
             // 
             this.NumCantidadColores.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumCantidadColores.Location = new System.Drawing.Point(183, 25);
+            this.NumCantidadColores.Location = new System.Drawing.Point(223, 25);
             this.NumCantidadColores.Maximum = new decimal(new int[] {
             10,
             0,
@@ -126,7 +133,7 @@
             // 
             this.LblCantidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LblCantidad.AutoSize = true;
-            this.LblCantidad.Location = new System.Drawing.Point(184, 9);
+            this.LblCantidad.Location = new System.Drawing.Point(224, 9);
             this.LblCantidad.Name = "LblCantidad";
             this.LblCantidad.Size = new System.Drawing.Size(52, 13);
             this.LblCantidad.TabIndex = 4;
@@ -138,7 +145,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnDegradado.Location = new System.Drawing.Point(15, 300);
             this.BtnDegradado.Name = "BtnDegradado";
-            this.BtnDegradado.Size = new System.Drawing.Size(219, 23);
+            this.BtnDegradado.Size = new System.Drawing.Size(259, 23);
             this.BtnDegradado.TabIndex = 5;
             this.BtnDegradado.Text = "Formar Degradado";
             this.BtnDegradado.UseVisualStyleBackColor = true;
@@ -150,17 +157,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnAgregar.Location = new System.Drawing.Point(15, 329);
             this.BtnAgregar.Name = "BtnAgregar";
-            this.BtnAgregar.Size = new System.Drawing.Size(219, 23);
+            this.BtnAgregar.Size = new System.Drawing.Size(259, 23);
             this.BtnAgregar.TabIndex = 6;
             this.BtnAgregar.Text = "Agregar Seleccionados";
             this.BtnAgregar.UseVisualStyleBackColor = true;
             this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
+            // ColHHex
+            // 
+            this.ColHHex.Text = "Hex";
+            this.ColHHex.Width = 89;
+            // 
             // Degradado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 361);
+            this.ClientSize = new System.Drawing.Size(284, 361);
             this.Controls.Add(this.BtnAgregar);
             this.Controls.Add(this.BtnDegradado);
             this.Controls.Add(this.LblCantidad);
@@ -171,8 +183,8 @@
             this.Controls.Add(this.TbColorFinal);
             this.Controls.Add(this.TbColorInicial);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MaximumSize = new System.Drawing.Size(260, 4000);
-            this.MinimumSize = new System.Drawing.Size(260, 400);
+            this.MaximumSize = new System.Drawing.Size(300, 4000);
+            this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "Degradado";
             this.Text = "Degradado";
             ((System.ComponentModel.ISupportInitialize)(this.NumCantidadColores)).EndInit();
@@ -194,5 +206,6 @@
         private System.Windows.Forms.Label LblCantidad;
         private System.Windows.Forms.Button BtnDegradado;
         private System.Windows.Forms.Button BtnAgregar;
+        private System.Windows.Forms.ColumnHeader ColHHex;
     }
 }

@@ -394,7 +394,7 @@ namespace Color_Picker {
             if (LisVieColores.SelectedItems.Count <= 0) return;
 
             int index = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
-            
+
             string[] cT = LisVieColores.Items[index].SubItems[1].Text.Split(',');
             int      r  = int.Parse($"{cT[0]}");
             int      g  = int.Parse($"{cT[1]}");
@@ -425,7 +425,7 @@ namespace Color_Picker {
 
             var contenido = "";
 
-            foreach (ListViewItem item in LisVieColores.Items) contenido += $"{item.Text} {Environment.NewLine}";
+            foreach (ListViewItem item in LisVieColores.Items) { contenido += $"{item.SubItems[1].Text}|{item.SubItems[2].Text}{Environment.NewLine}"; }
 
             var file = new StreamWriter(ruta);
 
@@ -443,8 +443,29 @@ namespace Color_Picker {
             LisVieColores.Items.Clear();
             string[] contenido = File.ReadAllLines(dialogo.FileName);
 
-            foreach (ListViewItem colorLista in contenido.Select(s => new ListViewItem(s))) {
-                colorLista.SubItems.Add("");
+            foreach (string s in contenido) {
+
+                string[] codigo = s.Split('|');
+                string   rgba   = codigo[0];
+                string   hex;
+
+                if (codigo.Length == 2) { hex = codigo[1]; }
+                else {
+                    string[] cT = rgba.Split(',');
+                    int      r  = int.Parse($"{cT[0]}");
+                    int      g  = int.Parse($"{cT[1]}");
+                    int      b  = int.Parse($"{cT[2]}");
+                    int      a  = int.Parse($"{cT[3]}");
+
+                    Color color = Funciones.TextoArgba(a, r, g, b);
+
+                    hex = color.ColorATexto();
+
+                }
+
+                var colorLista = new ListViewItem("");
+                colorLista.SubItems.Add(rgba);
+                colorLista.SubItems.Add(hex);
                 colorLista.UseItemStyleForSubItems = false;
                 LisVieColores.Items.Add(colorLista);
             }
@@ -520,21 +541,31 @@ namespace Color_Picker {
         private void LisVieColores_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => e.DrawDefault = true;
 
         private void LisVieColores_DrawSubItem(object sender, DrawListViewSubItemEventArgs e) {
+
             e.DrawBackground();
             e.DrawText();
-            int indexDibujo = e.ItemIndex;
+
+            int index = e.ItemIndex;
 
             if (LisVieColores.SelectedItems.Count <= 0) return;
 
-            int indexSeleccion = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
-
-            if (indexDibujo != indexSeleccion) return;
-
-            if ((e.ItemState & ListViewItemStates.Selected) != ListViewItemStates.Selected) return;
+            if (!LisVieColores.Items[index].Selected) return;
 
             Rectangle bounds = e.Bounds;
             bounds.Inflate(-1, -1);
-            ControlPaint.DrawFocusRectangle(e.Graphics, bounds);
+
+            ControlPaint.DrawBorder(e.Graphics, bounds, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid, Color.Black, 1, ButtonBorderStyle.Solid);
+        }
+
+        private void LisVieColores_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode != Keys.Delete) return;
+
+            if (LisVieColores.SelectedItems.Count <= 0) return;
+
+            int index = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
+
+            LisVieColores.Items[index].Remove();
+
         }
 
     }
