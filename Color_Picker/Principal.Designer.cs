@@ -81,6 +81,10 @@
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gimpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnSubir = new System.Windows.Forms.Button();
+            this.BtnBajar = new System.Windows.Forms.Button();
             this.PnlContR.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrBarR)).BeginInit();
@@ -584,10 +588,11 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
+            this.archivoToolStripMenuItem,
+            this.exportarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(650, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(678, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -614,11 +619,48 @@
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
+            // exportarToolStripMenuItem
+            // 
+            this.exportarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gimpToolStripMenuItem});
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.exportarToolStripMenuItem.Text = "Exportar";
+            // 
+            // gimpToolStripMenuItem
+            // 
+            this.gimpToolStripMenuItem.Name = "gimpToolStripMenuItem";
+            this.gimpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gimpToolStripMenuItem.Text = "Gimp";
+            this.gimpToolStripMenuItem.Click += new System.EventHandler(this.GimpToolStripMenuItem_Click);
+            // 
+            // BtnSubir
+            // 
+            this.BtnSubir.Location = new System.Drawing.Point(644, 184);
+            this.BtnSubir.Name = "BtnSubir";
+            this.BtnSubir.Size = new System.Drawing.Size(22, 23);
+            this.BtnSubir.TabIndex = 9;
+            this.BtnSubir.Text = "↑";
+            this.BtnSubir.UseVisualStyleBackColor = true;
+            this.BtnSubir.Click += new System.EventHandler(this.BtnSubir_Click);
+            // 
+            // BtnBajar
+            // 
+            this.BtnBajar.Location = new System.Drawing.Point(644, 213);
+            this.BtnBajar.Name = "BtnBajar";
+            this.BtnBajar.Size = new System.Drawing.Size(22, 23);
+            this.BtnBajar.TabIndex = 9;
+            this.BtnBajar.Text = "↓";
+            this.BtnBajar.UseVisualStyleBackColor = true;
+            this.BtnBajar.Click += new System.EventHandler(this.BtnBajar_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 502);
+            this.ClientSize = new System.Drawing.Size(678, 502);
+            this.Controls.Add(this.BtnBajar);
+            this.Controls.Add(this.BtnSubir);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PnlCheck);
             this.Controls.Add(this.panel2);
@@ -712,6 +754,10 @@
         private System.Windows.Forms.ToolStripMenuItem actualizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader CHHex;
+        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gimpToolStripMenuItem;
+        private System.Windows.Forms.Button BtnSubir;
+        private System.Windows.Forms.Button BtnBajar;
     }
 }
 

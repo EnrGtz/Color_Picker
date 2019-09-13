@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -567,6 +568,49 @@ namespace Color_Picker {
             LisVieColores.Items[index].Remove();
 
         }
+
+        private void GimpToolStripMenuItem_Click(object sender, EventArgs e) {
+            var dialogo = new SaveFileDialog { Filter = @"Gimp Palette (*.gpl)|*.gpl" };
+
+            if (dialogo.ShowDialog() != DialogResult.OK) return;
+
+            string ruta = dialogo.FileName;
+
+            string contenido = $"GIMP Palette {Environment.NewLine}";
+
+            foreach (ListViewItem item in LisVieColores.Items) {
+                string[] color = item.SubItems[1].Text.Split(',');
+                contenido += $"{color[0]} {color[1]} {color[2]}{Environment.NewLine}";
+            }
+
+            var file = new StreamWriter(ruta);
+
+            file.Write(contenido);
+            file.Flush();
+            file.Close();
+        }
+
+        private void BtnSubir_Click(object sender, EventArgs e) => MoverItem(true);
+
+        private void MoverItem(bool arriba) {
+            if (LisVieColores.SelectedItems.Count <= 0) return;
+
+            int index  = LisVieColores.Items.IndexOf(LisVieColores.SelectedItems[0]);
+            int nIndex = arriba ? index - 1 : index + 1;
+
+            if ((index == 0) && arriba) return;
+
+            if (nIndex >= LisVieColores.Items.Count) return;
+            
+            var old = LisVieColores.Items[index].Clone() as ListViewItem;
+
+            LisVieColores.Items.RemoveAt(index);
+            LisVieColores.Items.Insert(nIndex, old);
+            LisVieColores.Items[nIndex].Selected = true;
+            LisVieColores.Select();
+        }
+
+        private void BtnBajar_Click(object sender, EventArgs e) => MoverItem(false);
 
     }
 
